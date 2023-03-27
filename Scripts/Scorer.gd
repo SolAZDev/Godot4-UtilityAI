@@ -5,10 +5,9 @@ class_name Scorer
 @export var InvertIfFalse=false;
 @export var ConsideationFunction: Callable
 
-func get_score(): 
+func getScore() -> float: 
 	# TODO: Figure out how to pass 
-	if(ConsideationFunction.call()==true): return Score
+	if ConsideationFunction.call(): return Score
 	else:
-		if(InvertIfFalse):-Score
-		else: 0
-
+		return -Score if InvertIfFalse else 0
+		

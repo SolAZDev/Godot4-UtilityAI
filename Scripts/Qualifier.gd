@@ -4,10 +4,10 @@ enum QualifierTypes {SumOfChildren, AllOrNothing, MinimumOfNothing, FixedScore ,
 
 @export var Name:String
 @export var QualifierType= QualifierTypes.SumOfChildren
-@export var ScoreThreshold:int=0
+@export var ScoreThreshold:float=0
 @export var Qualifiers: Array[Scorer]
 @export var Actions: Array[Callable]
-@export var priorityLevel: int
+@export var priorityLevel: float
 
 func _init(name, qualifiers, actions, priorityLevel=0):
 	self.Name=name
@@ -15,10 +15,10 @@ func _init(name, qualifiers, actions, priorityLevel=0):
 	self.Actions=actions
 	self.priorityLevel=priorityLevel
 	
-func Act():
+func Act()->void:
 	for act in Actions: act
 
-func get_Score():
+func getScore() -> float:
 	match QualifierType:
 		QualifierTypes.SumOfChildren: return SumOfChildren()
 		QualifierTypes.AllOrNothing: return AllOrNothing()

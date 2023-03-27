@@ -4,6 +4,9 @@ enum SelectorType {Highest, First}
 @export var WhichWins: SelectorType
 @export var Qualifiers: Array[Qualifier]
 @export var DefaultAction: Array[Callable]
+
+var SelectedQualifier: Qualifier = null
+
 func StartDefaultAction(): for act in DefaultAction: act
 
 func _calculate():
@@ -11,15 +14,18 @@ func _calculate():
 	else: first()
 	
 func highest():
-	var highestValue=0;
-	var winningQualifier:int=-1;
+	var highestValue:float=0;
+	var winningQualifier:float=-1;
 	for i in Qualifiers.size():
 		# Calculate Score here.
-		var active_score = Qualifiers[i].get_Score()
+		var active_score = Qualifiers[i].getScore()
 		if active_score>highestValue:
 			highestValue=active_score
 			winningQualifier=i
-	if(winningQualifier>-1): Qualifiers[winningQualifier].Act()
+
+	if(winningQualifier>-1): 
+		SelectedQualifier = Qualifiers[winningQualifier]
+		SelectedQualifier.Act()
 	else: StartDefaultAction()
 	
 func first():
